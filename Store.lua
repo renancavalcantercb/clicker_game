@@ -5,17 +5,17 @@ function Store.create(sceneGroup, buyCallback, AutoClickInitialCost)
         error("AutoClickInitialCost must be a number")
     end
 
-    local storeButton = display.newRect(display.contentCenterX, 500, 200, 100)
+    local storeButton = display.newRect(display.contentCenterX, 400, 200, 100)
     storeButton:setFillColor(1, 0, 0)
     sceneGroup:insert(storeButton)
     storeButton:addEventListener("tap", buyCallback)
 
     local AutoClickCost = AutoClickInitialCost
-    local AutoCickCostText = display.newText("Autoclick: $" .. AutoClickCost, display.contentCenterX, 500, native.systemFont, 24)
+    local AutoCickCostText = display.newText("Autoclick: $" .. AutoClickCost, display.contentCenterX, 400, native.systemFont, 24)
     sceneGroup:insert(AutoCickCostText)
 
-    function Store.updateStoreButtonColor(podeComprar)
-        if podeComprar then
+    function Store.updateStoreButtonColor(canBuy)
+        if canBuy then
             storeButton:setFillColor(0, 1, 0)
         else
             storeButton:setFillColor(1, 0, 0)
