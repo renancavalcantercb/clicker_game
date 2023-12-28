@@ -1,11 +1,12 @@
 local json = require("json")
 local utils = {}
 
-function utils.save(money, AutoClickCost, AutoClickQtd)
+function utils.save(money, AutoClickCost, AutoClickQtd, moneyIncrement)
     local saveData = {
         money = money,
         AutoClickCost = AutoClickCost,
-        AutoClickQtd = AutoClickQtd
+        AutoClickQtd = AutoClickQtd,
+        moneyIncrement = moneyIncrement
     }
     local saveDataString = json.encode(saveData)
     local path = system.pathForFile("save.json", system.DocumentsDirectory)
