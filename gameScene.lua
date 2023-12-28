@@ -8,17 +8,18 @@ function scene:create(event)
     local sceneGroup = self.view
 
     local money = 0
+    local moneyIncrement = 1
     local AutoClickCost = 50
     local AutoClickQtd = 0
 
     local moneyString = display.newText("Money: " .. money, display.contentCenterX, 100, native.systemFont, 40)
     sceneGroup:insert(moneyString)
 
-    local AutoClickQtdString = display.newText("Autocliques: " .. AutoClickQtd, display.contentCenterX, 150, native.systemFont, 24)
+    local AutoClickQtdString = display.newText("Autoclickers: " .. AutoClickQtd, display.contentCenterX, 150, native.systemFont, 24)
     sceneGroup:insert(AutoClickQtdString)
 
     local function IncreaseScore(value)
-        money = money + value
+        money = money + (value * moneyIncrement)
         moneyString.text = "Money: " .. money
         Store.updateStoreButtonColor(money >= AutoClickCost)
     end
@@ -31,12 +32,13 @@ function scene:create(event)
 
     local loadedData = utils.load()
     if loadedData then
-        print(loadedData)
         money = loadedData.money
         AutoClickCost = loadedData.AutoClickCost
         AutoClickQtd = loadedData.AutoClickQtd or 0
+        moneyIncrement = loadedData.moneyIncrement or 1
+        
         moneyString.text = "Money: " .. money
-        AutoClickQtdString.text = "Autocliques: " .. AutoClickQtd
+        AutoClickQtdString.text = "Autoclickers: " .. AutoClickQtd
         ActivateAutoClicks(AutoClickQtd)
     end
 
@@ -46,13 +48,18 @@ function scene:create(event)
         if money >= AutoClickCost then
             money = money - AutoClickCost
             moneyString.text = "Money: " .. money
-            AutoClickCost = math.ceil(AutoClickCost * 1.15)
+            AutoClickCost = math.ceil(AutoClickCost * 1.33)
             AutoClickQtd = AutoClickQtd + 1
-            AutoClickQtdString.text = "Autocliques: " .. AutoClickQtd
+
+            if AutoClickQtd % 10 == 0 then
+                moneyIncrement = moneyIncrement + 1
+            end
+
+            AutoClickQtdString.text = "Autoclickers: " .. AutoClickQtd
             Store.updateCost(AutoClickCost)
             ActivateAutoClicks(AutoClickQtd)
             Store.updateStoreButtonColor(money >= AutoClickCost)
-            utils.save(money, AutoClickCost, AutoClickQtd)
+            utils.save(money, AutoClickCost, AutoClickQtd, moneyIncrement)
         else
             print("Not enough money")
         end
@@ -65,6 +72,7 @@ function scene:create(event)
         height = 50,
         color = {0.5, 0.5, 1},
         value = 1,
+        text = "Click!",
         tapAction = IncreaseScore
     }
     local button = ButtonClass.newButton(buttonOptions)
