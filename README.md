@@ -4,7 +4,7 @@
 This project is a simple clicker game developed using Solar2D and programmed in Lua. The goal of the game is to collect as many coins as possible. You can collect coins by click on the coin or by buying upgrades. The game is still in development and will be updated regularly.
 
 ## How to play
-You can access the game by clicking <a href="https://renancavalcantercb.github.io/clicker_game/html5/" target="_blank">here</a>(The web version is just a demo and may contain some bugs. The project is more focused on mobile devices). 
+You can access the game by clicking [here](https://renancavalcantercb.github.io/clicker_game/html5/) (The web version is just a demo and may contain some bugs. The project is more focused on mobile devices). 
 
 Or you can clone the repository and run the game using Solar2D simulator. To clone the repository, run the following command:
 ```
