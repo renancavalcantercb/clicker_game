@@ -1,0 +1,17 @@
+AndroidResources/
+images.xcassets/
+LaunchScreen.storyboardc/
+
+
+*.tmp
+*.log
+*.bak
+*.swp
+.DS_Store
+
+build/
+*.apk
+*.app
+
+*.png
+*.settings
