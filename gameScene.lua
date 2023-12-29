@@ -26,13 +26,15 @@ function scene:create(event)
 
     local activeTimers = {}
 
-    local function ActivateAutoClicks(qtd)
-        for i, timer in ipairs(activeTimers) do
-            timer.cancel(timer)
+    local function ActivateAutoClicks(quantidade)
+        for i, timerHandle in ipairs(activeTimers) do
+            timer.cancel(timerHandle)
             activeTimers[i] = nil
         end
 
-        for i = 1, qtd do
+        activeTimers = {}
+
+        for i = 1, quantidade do
             local newTimer = timer.performWithDelay(1000, function() IncreaseScore(1) end, 0)
             table.insert(activeTimers, newTimer)
         end
