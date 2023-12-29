@@ -4,6 +4,8 @@ local Store = require("Store")
 local utils = require("utils")
 local scene = composer.newScene()
 
+local lastTime
+
 function scene:create(event)
     local sceneGroup = self.view
 
@@ -30,6 +32,19 @@ function scene:create(event)
         end
     end
 
+    local function saveCurrentTime()
+        lastTime = os.time()
+    end
+
+    local function applyElapsedTime()
+        if lastTime then
+            local currentTime = os.time()
+            local elapsedTime = currentTime - lastTime
+            local moneyEarned = elapsedTime * AutoClickQtd
+            IncreaseScore(moneyEarned)
+        end
+    end
+
     local loadedData = utils.load()
     if loadedData then
         money = loadedData.money
@@ -40,9 +55,8 @@ function scene:create(event)
         moneyString.text = "Money: " .. money
         AutoClickQtdString.text = "Autoclickers: " .. AutoClickQtd
         ActivateAutoClicks(AutoClickQtd)
+        saveCurrentTime()
     end
-
-
 
     local function BuyAutoClicks()
         if money >= AutoClickCost then
@@ -60,6 +74,7 @@ function scene:create(event)
             ActivateAutoClicks(AutoClickQtd)
             Store.updateStoreButtonColor(money >= AutoClickCost)
             utils.save(money, AutoClickCost, AutoClickQtd, moneyIncrement)
+            saveCurrentTime()
         else
             print("Not enough money")
         end
@@ -79,8 +94,16 @@ function scene:create(event)
     sceneGroup:insert(button)
 
     Store.create(sceneGroup, BuyAutoClicks, AutoClickCost)
+
+    function scene:show(event)
+        if event.phase == "will" then
+            applyElapsedTime()
+            saveCurrentTime()
+        end
+    end
 end
 
 scene:addEventListener("create", scene)
+scene:addEventListener("show", scene)
 
 return scene
