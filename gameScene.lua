@@ -48,7 +48,7 @@ function scene:create(event)
         if money >= AutoClickCost then
             money = money - AutoClickCost
             moneyString.text = "Money: " .. money
-            AutoClickCost = math.ceil(AutoClickCost * 1.33)
+            AutoClickCost = math.ceil(AutoClickCost * 1.25)
             AutoClickQtd = AutoClickQtd + 1
 
             if AutoClickQtd % 10 == 0 then
