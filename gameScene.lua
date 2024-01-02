@@ -102,7 +102,7 @@ function scene:create(event)
         timer.performWithDelay(1000, function() popup:removeSelf() end)
     end
 
-    timer.performWithDelay(6000, saveGame, 0)
+    timer.performWithDelay(60000, saveGame, 0)
 end
 
 scene:addEventListener("create", scene)
