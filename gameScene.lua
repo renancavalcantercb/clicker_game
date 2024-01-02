@@ -13,13 +13,13 @@ function scene:create(event)
     local AutoClickCost = 50
     local AutoClickQtd = 0
 
-    local moneyString = display.newText("Money: " .. utils.formatNumber(money), display.contentCenterX, 0, native.systemFont, 24)
+    local moneyString = display.newText("Money: " .. utils.formatNumber(money), display.contentCenterX, 25, native.systemFont, 24)
     sceneGroup:insert(moneyString)
 
-    local AutoClickQtdString = display.newText("Autoclickers: " .. AutoClickQtd, display.contentCenterX, 25, native.systemFont, 24)
+    local AutoClickQtdString = display.newText("Autoclickers: " .. AutoClickQtd, display.contentCenterX, 50, native.systemFont, 24)
     sceneGroup:insert(AutoClickQtdString)
 
-    local moneyPerSecondString = display.newText("Money/s: " .. utils.formatNumber(moneyPerSecond), display.contentCenterX, 50, native.systemFont, 24)
+    local moneyPerSecondString = display.newText("Money/s: " .. utils.formatNumber(moneyPerSecond), display.contentCenterX, 75, native.systemFont, 24)
     sceneGroup:insert(moneyPerSecondString)
 
     local function IncreaseScore(value)
@@ -97,12 +97,12 @@ function scene:create(event)
 
     local function saveGame()
         utils.save(money, AutoClickCost, AutoClickQtd, moneyIncrement, moneyPerSecond)
-        local popup = display.newText("Game Saved!", display.contentCenterX, 425, native.systemFont, 16)
+        local popup = display.newText("Game Saved!", display.contentCenterX, 375, native.systemFont, 16)
         sceneGroup:insert(popup)
         timer.performWithDelay(1000, function() popup:removeSelf() end)
     end
 
-    timer.performWithDelay(60000, saveGame, 0)
+    timer.performWithDelay(6000, saveGame, 0)
 end
 
 scene:addEventListener("create", scene)
