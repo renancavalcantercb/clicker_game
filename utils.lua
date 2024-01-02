@@ -29,4 +29,28 @@ function utils.load()
     return nil
 end
 
+function utils.formatNumber(value, decimalPlaces)
+    decimalPlaces = decimalPlaces or 2
+
+    local formatString = "%0." .. decimalPlaces .. "f"
+    local formattedValue = string.format(formatString, value)
+
+    local integerPart, decimalPart = string.match(formattedValue, "(%d+)%.(%d*)")
+
+    if not integerPart then
+        integerPart = formattedValue
+    end
+
+    local formattedIntegerPart = string.gsub(integerPart, "^(-?%d+)(%d%d%d)", '%1,%2')
+
+    if decimalPlaces > 0 and decimalPart then
+        formattedValue = formattedIntegerPart .. "." .. decimalPart
+    else
+        formattedValue = formattedIntegerPart
+    end
+
+    return formattedValue
+end
+
+
 return utils
