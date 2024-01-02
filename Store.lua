@@ -11,7 +11,7 @@ function Store.create(sceneGroup, buyCallback, AutoClickInitialCost)
     storeButton:addEventListener("tap", buyCallback)
 
     local AutoClickCost = AutoClickInitialCost
-    local AutoCickCostText = display.newText("Autoclick: $" .. AutoClickCost, display.contentCenterX, 400, native.systemFont, 24)
+    local AutoCickCostText = display.newText("Autoclick: $" .. AutoClickCost, display.contentCenterX, 400, native.systemFont, 20)
     sceneGroup:insert(AutoCickCostText)
 
     function Store.updateStoreButtonColor(canBuy)
