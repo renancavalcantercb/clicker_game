@@ -98,7 +98,7 @@ function scene:create(event)
 
     local function saveGame()
         utils.save(money, AutoClickCost, AutoClickQtd, moneyIncrement, moneyPerSecond)
-        local popup = display.newText("Game Saved!", display.contentCenterX, 375, native.systemFont, 16)
+        local popup = display.newText("Game Saved!", display.contentCenterX, 365, native.systemFont, 16)
         sceneGroup:insert(popup)
         timer.performWithDelay(1000, function() popup:removeSelf() end)
     end
