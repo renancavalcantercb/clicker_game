@@ -29,6 +29,11 @@ function utils.load()
     return nil
 end
 
+function utils.reset()
+    local path = system.pathForFile("save.json", system.DocumentsDirectory)
+    os.remove(path)
+end
+
 function utils.formatNumber(value, decimalPlaces)
     decimalPlaces = decimalPlaces or 2
 
