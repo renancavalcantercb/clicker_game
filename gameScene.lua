@@ -92,6 +92,7 @@ function scene:create(event)
     }
     local button = ButtonClass.newButton(buttonOptions)
     sceneGroup:insert(button)
+    sceneGroup:insert(button.text)
 
     Store.create(sceneGroup, BuyAutoClicks, AutoClickCost)
 
@@ -103,6 +104,19 @@ function scene:create(event)
     end
 
     timer.performWithDelay(60000, saveGame, 0)
+
+    local backButton = display.newRect(display.contentCenterX, display.contentHeight - 50, 200, 100)
+    backButton:setFillColor(0, 0, 1)
+    sceneGroup:insert(backButton)
+
+    local backButtonText = display.newText("Back", display.contentCenterX, display.contentHeight - 50, native.systemFont, 40)
+    sceneGroup:insert(backButtonText)
+
+    local function goToMenu()
+        composer.gotoScene("menuScene")
+    end
+
+    backButton:addEventListener("tap", goToMenu)
 end
 
 scene:addEventListener("create", scene)
